@@ -26,3 +26,7 @@ add_action('wp_enqueue_scripts', 'br_register_core_js');
 if( file_exists( BR_CORE_INC . 'core-functions.php') ){ //verifica se o caminho para o arquivo core-init.php existe
     require_once BR_CORE_INC . 'core-functions.php'; //executa a função require_once, que serve para chamar o arquivo
 }
+
+if( file_exists( BR_CORE_INC . 'shortcodes.php') ){ //verifica se o caminho para o arquivo core-init.php existe
+    require_once BR_CORE_INC . 'shortcodes.php'; //executa a função require_once, que serve para chamar o arquivo
+}
