@@ -16,3 +16,4 @@ function foobar_func( $atts ){
 function br_register_shortcodes(){
     add_shortcode( 'foobar', 'foobar_func' );
 }
+add_action('init', 'br_register_shortcodes');
