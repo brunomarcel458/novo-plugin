@@ -30,3 +30,7 @@ if( file_exists( BR_CORE_INC . 'br-core-functions.php') ){ //verifica se o camin
 if( file_exists( BR_CORE_INC . 'br-shortcodes.php') ){ //verifica se o caminho para o arquivo core-init.php existe
     require_once BR_CORE_INC . 'br-shortcodes.php'; //executa a função require_once, que serve para chamar o arquivo
 }
+
+if( file_exists( BR_CORE_INC . 'br-admin-functions.php') ){ //verifica se o caminho para o arquivo core-init.php existe
+    require_once BR_CORE_INC . 'br-admin-functions.php'; //executa a função require_once, que serve para chamar o arquivo
+}
