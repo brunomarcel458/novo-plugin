@@ -16,11 +16,20 @@ function br_register_core_css(){
 }
 add_action('wp_enqueue_scripts', 'br_register_core_css');
 
-//registrando JS/jQuery
+//registrando JS/jQuery (FRONTEND)
 function br_register_core_js(){
     wp_enqueue_script('br-core', BR_CORE_JS . 'br-core.js', 'jquery', time(), true);
 }
 add_action('wp_enqueue_scripts', 'br_register_core_js');
+
+//registrando JS/jQuery (BACKEND)
+function br_register_admin_js(){
+    if(! did_action('wp_enqueue_media') ){
+        wp_enqueue_media();
+    }
+    wp_enqueue_script('br-admin', BR_CORE_JS . 'br-admin.js', 'jquery', time(), true);
+}
+add_action('admin_enqueue_scripts', 'br_register_admin_js');
 
 //includes
 if( file_exists( BR_CORE_INC . 'br-core-functions.php') ){ //verifica se o caminho para o arquivo core-init.php existe

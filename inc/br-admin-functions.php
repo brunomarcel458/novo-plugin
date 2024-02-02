@@ -7,6 +7,8 @@ if (!defined('WPINC')) {
     die();
 }
 
+add_action('admin_menu', 'br_admin_menu_page');
+
 function br_admin_menu_page()
 {
     add_menu_page(
@@ -19,7 +21,6 @@ function br_admin_menu_page()
         1                             // prioridade 
     );
 }
-add_action('admin_menu', 'br_admin_menu_page');
 
 function br_admin_page_content(){
     echo '<div class="wrap">';
@@ -35,38 +36,67 @@ function br_admin_page_content(){
     echo '</div>';
 }
 
-// function br_register_settings(){
-//     // Registrar uma seção de configuração
-//     register_settings(
-//         'br_settings',           //nome grupo
-//         'br_home_text',          //nome da opção
-//         'sanitize_text_field',    //sanitização
-//     );
+add_action('admin_init', 'br_register_setting');
 
-//     add_settings_section(
-//         'br_settings_section_id',     //id da seção 
-//         'Título',                     //titulo
-//         '',                           //callback
-//         'novo-plugin',                //slug     
-//     );
+function br_register_setting(){
+    // Registrar uma seção de configuração
+    register_setting(
+        'br_settings',              //nome grupo
+        'br_home_text',             //nome da opção
+        'sanitize_text_field',      //sanitização
+    );
 
-//     add_settings_field(
-//         'br_home_text',
-//         'Home text',
-//         'br_text_field_html',    //funcao que mostra o campo
-//         'novo-plugin',                //slug     
-//         'br_settings_section_id',     //id da seção 
-//         array(
-//             'label_for' => 'home_text',
-//             'class'     => 'br_class'
-//         )
-//     )
+    add_settings_section(
+        'br_settings_section_id',     //id da seção 
+        'Título da Seção',                     //titulo
+        '',                           //callback
+        'novo-plugin',                //slug     
+    );
 
-//     ('br_settings', 'br_settings'); // nome do grupo de configurações
-// }
+    add_settings_field(
+        'br_home_text',
+        'Home text',
+        'br_text_field_html',    //funcao que mostra o campo
+        'novo-plugin',                //slug     
+        'br_settings_section_id',     //id da seção 
+        array(
+            'label_for' => 'home_text',
+            'class'     => 'br_class'
+        )
+    );
 
-// function br_text_field_html(){
-//     $text = get_option('br_home_text');
+    add_settings_field(
+        'br_home_logo',
+        'Logo',
+        'br_logo_field_html',    //funcao que mostra o campo
+        'novo-plugin',                //slug     
+        'br_settings_section_id',     //id da seção 
+        array(
+            'label_for' => 'home_logo',
+            'class'     => 'br_class'
+        )
+    );
+}
 
-//     printf('<input type="text" id="br_home_text" name="br_home_text" value="%s" />', esc_attr( $text ));
-// }
+function br_text_field_html(){
+    $text = get_option('br_home_text');
+    printf('<input type="text" id="br_home_text" name="br_home_text" value="%s" />', esc_attr( $text ));
+}
+
+function br_logo_field_html(){
+    $logo_id = get_option('br_home_logo');
+
+    if($logo = wp_get_attachment_image_src($logo_id)){
+        
+        echo '<a href="#" class="br-upl"><img src="' . $logo[0] . '"></a>';
+        echo '<a href="#" class="br-rmv">Remover Logo</a>';
+        echo '<input type="hidden" name="br-logo" value="' . $logo_id . '"></input>';
+    
+    } else {
+
+        echo '<a href="#" class="br-upl">Upload Logo</a>';
+        echo '<a href="#" class="br-rmv" style="display:none;">Remover Logo</a>';
+        echo '<input type="hidden" name="br-logo" value=""></input>';
+
+    }
+}

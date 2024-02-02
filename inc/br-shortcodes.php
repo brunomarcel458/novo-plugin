@@ -32,7 +32,10 @@ function botao_website( $atts ) {
 
 //shortcode content
 function caption_shortcode( $atts, $content = null ) {
-	return '<span class="caption">' . $content . '</span>';
+
+	$text = get_option('br_home_text');
+
+	return '<span class="caption">' . $content . '--' . $text . '</span>';
 }
 
 
