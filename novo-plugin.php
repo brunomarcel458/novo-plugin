@@ -4,7 +4,7 @@
 Plugin name: Novo Plugin
 Plugin URI: #
 Description: Plugin of functions to Wordpress
-Version: 1.0.7
+Version: 1.0.8
 Author: Bruno Marcel
 Author URI: https://#
 Text Domain: np

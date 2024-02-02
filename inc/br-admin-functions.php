@@ -46,6 +46,12 @@ function br_register_setting(){
         'sanitize_text_field',      //sanitização
     );
 
+    register_setting(
+        'br_settings',              //nome grupo
+        'br_home_logo',             //nome da opção
+        'sanitize_text_field',      //sanitização
+    );
+
     add_settings_section(
         'br_settings_section_id',     //id da seção 
         'Título da Seção',                     //titulo
@@ -90,13 +96,13 @@ function br_logo_field_html(){
         
         echo '<a href="#" class="br-upl"><img src="' . $logo[0] . '"></a>';
         echo '<a href="#" class="br-rmv">Remover Logo</a>';
-        echo '<input type="hidden" name="br-logo" value="' . $logo_id . '"></input>';
+        echo '<input type="hidden" name="br_home_logo" value="' . $logo_id . '"></input>';
     
     } else {
 
         echo '<a href="#" class="br-upl">Upload Logo</a>';
         echo '<a href="#" class="br-rmv" style="display:none;">Remover Logo</a>';
-        echo '<input type="hidden" name="br-logo" value=""></input>';
+        echo '<input type="hidden" name="br_home_logo" value=""></input>';
 
     }
 }
